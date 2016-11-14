@@ -1,0 +1,81 @@
+grammar hu.bme.aut.menetrend.Menetrend with org.eclipse.xtext.common.Terminals
+
+generate menetrend "http://www.bme.hu/aut/menetrend/Menetrend"
+
+Model:
+	'Stops'
+	stops+=Stop (',' stops+=Stop)*
+	'Schedules'
+	schedules+=Schedule+;
+	
+Schedule:
+	'Line' lineNumber=LineNumber ':'
+	scheduleParts+=SchedulePart+;
+	
+LineNumber:
+	type=TransportType '-' number = (LineNumberInt | LineNumberBkvIdLf | LineNumberBkvIdLb);
+	
+LineNumberInt:
+	INT;
+LineNumberBkvIdLf:
+	BKV_ID_LF;
+LineNumberBkvIdLb:
+	BKV_ID_LB;
+	
+terminal BKV_ID_LF:
+	('A'..'Z')INT('A'..'Z')?;
+	
+terminal BKV_ID_LB:
+	('A'..'Z')?INT('A'..'Z');
+	
+SchedulePart:
+	RelativeSchedule | AbsoluteSchedule;
+
+RelativeSchedule:
+	start=[Stop|STRING] targets+=(RelativeTarget)+;
+
+RelativeTarget:
+	'-[' length=INT ']->' target=[Stop|STRING];
+
+AbsoluteSchedule:
+	daytype=DayType departures+=Departure ((','|'...') departures+=Departure)*;
+	
+Departure:
+	SimpleTimeFormat | ComplexTimeMiddle | ComplexTimeEnd;
+	
+SimpleTimeFormat:
+	from=TIME_FORMAT;
+
+ComplexTimeMiddle:
+	from=TIME_FORMAT '-' until=TIME_FORMAT '/' frequency=INT;
+
+ComplexTimeEnd:
+	from=TIME_FORMAT '/' frequency=INT '/' until=TIME_FORMAT;
+
+Stop: 
+	name=STRING;
+	
+terminal fragment DUAL_INT_NOLEADZERO:
+	DIGIT_ONE DIGIT?;
+	
+terminal fragment DUAL_INT_LEADZERO:
+	DIGIT DIGIT?;
+	
+terminal fragment DIGIT: 
+	('0'..'9');
+	
+terminal fragment DIGIT_ONE: 
+	('1'..'9');
+	
+terminal TIME_FORMAT:
+	DUAL_INT_NOLEADZERO ':' DUAL_INT_LEADZERO;
+	
+enum TransportType:
+	BUS='Bus' | TRAM='Tram' | METRO='Metro' | TROLI='Troli' | HEV='Hev'; 
+	
+enum DayType:
+	WEEKDAYS='weekdays' | WEEKENDS='weekends' | 
+	MONDAY='monday' | TUESDAY='tuesday' | 
+	WEDNESDAY='wednesday' | THURSDAY='thursday' | 
+	FRIDAY='friday' | SATURDAY='saturday' | 
+	SUNDAY='sunday';

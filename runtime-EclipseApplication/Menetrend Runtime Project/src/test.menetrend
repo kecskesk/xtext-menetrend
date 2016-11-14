@@ -1,0 +1,41 @@
+Stops
+	"Corvin negyed",
+	"Mester utca", 
+	"Boráros tér",
+	"Móricz Zsigmond körtér",
+	"Széll Kálmán tér",
+	"Deák Ferenc tér"
+
+Schedules
+Line Bus-V56 :
+	"Corvin negyed" -[2]-> "Mester utca"
+		-[4]-> "Boráros tér"
+
+Line Bus-V56 : 
+	weekdays 8:14, 9:23 ... 10:00/5/15:00
+	sunday 9:00-12:00/5
+	
+Line Tram-4 :
+	"Corvin negyed" -[3]-> "Mester utca"
+		-[2]-> "Boráros tér"
+
+Line Tram-4 : 
+	weekdays 8:20, 8:23 ... 9:00/5/12:00
+	sunday 9:00-12:00/5
+	
+Line Metro-M3 :
+	"Boráros tér" -[9]-> "Mester utca"
+	
+Line Metro-M3 : 
+	weekdays 8:20, 8:23 ... 9:00/5/12:00
+	saturday 9:00-12:00/5
+	
+Line Troli-72 : 
+	"Mester utca" -[40]-> "Boráros tér"
+	
+Line Troli-72 :
+	weekdays 5:12-23:45/8
+	weekends 15:15/1/18:59 ... 19:12/3/23:23
+	
+Line Metro-M2 : 
+	"Mester utca" -[41]-> "Boráros tér"
