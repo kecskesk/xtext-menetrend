@@ -48,7 +48,7 @@ class MenetrendGenerator extends AbstractGenerator {
 		}
 	}
 
-	private def dispatch format(List<Schedule> lSch) '''
+	private def dispatch formatSch(List<Schedule> lSch) '''
 		«var relatives = new ArrayList<RelativeSchedule>()»
 		«var absolutes = new ArrayList<AbsoluteSchedule>()»
 		«{ for (sch: lSch) {
@@ -66,6 +66,22 @@ class MenetrendGenerator extends AbstractGenerator {
 			«formatSchedule(relatives, absolutes)»
 		«ENDIF»
 	'''
+
+	private def dispatch formatPlan(List<Schedule> lSch) '''
+		«var relatives = new ArrayList<RelativeSchedule>()»
+		«{ for (sch: lSch) {
+			for (schedule: sch.scheduleParts) {
+				if (schedule instanceof RelativeSchedule) {
+					relatives.add(schedule)
+				} 
+			}
+		} ''}»
+		«IF relatives.isEmpty»
+			 ERROR CODE 1 - Please provide relative schedule.
+		«ELSE»
+			«formatTripPlan(relatives)»
+		«ENDIF»
+	'''
 	
 	private def formatSchedule(List<RelativeSchedule> relatives, List<AbsoluteSchedule> absolutes) '''
 		««« for all the days
@@ -79,6 +95,14 @@ class MenetrendGenerator extends AbstractGenerator {
 					«formatOneStop(relativeTarget.target, absolute, relativeTarget.length)»
 				«ENDFOR»
 			«ENDFOR»
+		«ENDFOR»
+	'''
+	
+	private def formatTripPlan(List<RelativeSchedule> relatives) '''
+		««« for all the routes
+		«FOR relative : relatives»
+			««« print the start then print all the other stops
+			«relative.start.name»#«FOR relativeTarget : relative.targets»«relativeTarget.target.name»@«relativeTarget.length»&«ENDFOR»
 		«ENDFOR»
 	'''
 	
@@ -158,7 +182,8 @@ class MenetrendGenerator extends AbstractGenerator {
 		fsa.generateFile('stops.csv', stops.map[st|st.format].join(';'));
 		
 		for (scheduleEntry : schedules.entrySet) {
-			fsa.generateFile('schedule' + scheduleEntry.key + '.csv', format(scheduleEntry.value))
+			fsa.generateFile('schedule' + scheduleEntry.key + '.csv', formatSch(scheduleEntry.value))
+			fsa.generateFile('plan' + scheduleEntry.key + '.csv', formatPlan(scheduleEntry.value))
 		}
 		
 	}
