@@ -1,0 +1,38 @@
+1R(5): 
+use the Tram-4: get on its first stop (Corvin negyed) then go to Mester utca
+10R(4): 
+use the Troli-72: sorry you wont get there with Troli-72 its, the last stop.
+or you can 
+
+11R(4): 
+use the Tram-4: connect in at Mester utca and go to Boráros tér And you're there. 
+or you can 
+
+12R(4): 
+use the Tram-6: connect in at Mester utca and go to Corvin negyed
+120R(3): 
+use the Tram-4: get on its first stop (Corvin negyed) then go to Mester utca
+1200R(2): 
+use the Troli-72: sorry you wont get there with Troli-72 its, the last stop.
+or you can 
+
+1201R(2): 
+use the Tram-4: connect in at Mester utca and go to Boráros tér And you're there. 
+or you can 
+
+1202R(2): 
+use the Tram-6: connect in at Mester utca and go to Corvin negyed
+12020R(1): 
+use the Tram-4: get on its first stop (Corvin negyed) then go to Mester utca recursion-over.
+or you can 
+
+12021R(1): 
+use the Tram-6: sorry you wont get there with Tram-6 its, the last stop.
+or you can 
+
+121R(3): 
+use the Tram-6: sorry you wont get there with Tram-6 its, the last stop.
+or you can 
+
+2R(5): 
+use the Tram-6: sorry you wont get there with Tram-6 its, the last stop.
