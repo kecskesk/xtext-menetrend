@@ -15,7 +15,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -100,7 +99,7 @@ public class UtvonaltervApplication {
                     planParams.setAt(planTime);
                     
                     Planner planner = new Planner(planParams, scheduleData);
-                    String result = planner.calculateRoute();
+                    String result = planner.calculateRoute(5);
                     pageVariables.put("result", result);
                     StringWriter writer = new StringWriter();
                     try {
