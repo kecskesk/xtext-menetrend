@@ -77,6 +77,7 @@ public class UtvonaltervApplication {
                 String day = request.queryParams("day");
                 String hour = request.queryParams("hour");
                 String minute = request.queryParams("minute");
+                String debugMode = request.queryParams("debugMode");
 
                 Map<String, Object> pageVariables = new HashMap<>();
 
@@ -85,6 +86,7 @@ public class UtvonaltervApplication {
                 pageVariables.put("day", day);
                 pageVariables.put("hour", hour);
                 pageVariables.put("minute", minute);
+                pageVariables.put("debugMode", debugMode);
 
                 SimpleDateFormat formatter = new SimpleDateFormat("H:mm");
                 Date planDate;
@@ -97,6 +99,7 @@ public class UtvonaltervApplication {
                     planParams.setTo(scheduleData.getStops().get(to));
                     planParams.setDay(Day.fromString(day));
                     planParams.setAt(planTime);
+                    planParams.setDebugMode(Boolean.valueOf(debugMode));
                     
                     Planner planner = new Planner(planParams, scheduleData);
                     String result = planner.calculateRoute(5);

@@ -50,11 +50,11 @@ public class ScheduleData {
     }
 
     public ScheduleData populateStops() throws IOException {
-        List<String> stops = getFilesOnPath().get("stops.csv");
-        if (stops == null || stops.size() != 1) {
+        List<String> stopsFile = getFilesOnPath().get("stops.csv");
+        if (stopsFile == null || stopsFile.size() != 1) {
             throw new IOException("stops.csv not ready to read");
         } else {
-            for (String name : stops.get(0).split(";")) {
+            for (String name : stopsFile.get(0).split(";")) {
                 getStops().put(name, new Stop(name));
             }
             return this;

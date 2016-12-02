@@ -81,7 +81,13 @@
                               }
                             </script>
                     </div>
-                    
+                    <div style="margin:0; padding:0; height:25px;"></div>
+
+                    <div class="form-group">
+                        <label for="debugMode">DebugMode:</label>
+                        <input required type="text" class="form-control" id="debugMode" name="debugMode">
+                    </div>
+
                     <div style="margin:0; padding:0; height:25px;"></div>
 
                     <div class="form-group">

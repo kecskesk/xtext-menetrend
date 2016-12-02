@@ -36,7 +36,8 @@
                         ${from}<br/>
                         ${to}<br/>
                         ${day}<br/>
-                        ${hour}:${minute}
+                        ${hour}:${minute}<br/>
+                        ${debugMode}
                     </div>
                 </div>
             </div>
@@ -48,6 +49,34 @@
                     </div>
                 </div>
             </div>
+
+
+            <form action="/plan_result" method="POST">
+                <input type="hidden" value="${from}" name="from" />
+                <input type="hidden" value="${to}" name="to" />
+                <input type="hidden" value="${day}" name="day" />
+                <input type="hidden" value="${hour}" name="hour" />
+                <input type="hidden" value="${minute}" name="minute" />
+                <input type="hidden" value="true" name="debugMode" />
+
+                <div class="form-group">
+                    <button id="submit" type="submit" class="btn btn-default">Resend with debugMode on</button>
+                </div>
+            </form>
+
+            <form action="/plan_result" method="POST">
+                <input type="hidden" value="${from}" name="from" />
+                <input type="hidden" value="${to}" name="to" />
+                <input type="hidden" value="${day}" name="day" />
+                <input type="hidden" value="${hour}" name="hour" />
+                <input type="hidden" value="${minute}" name="minute" />
+                <input type="hidden" value="false" name="debugMode" />
+
+                <div class="form-group">
+                    <button id="submit" type="submit" class="btn btn-default">Resend with debugMode off</button>
+                </div>
+            </form>
+
         </div>
     </body>
 </html>
